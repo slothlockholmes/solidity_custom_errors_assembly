@@ -12,12 +12,25 @@ contract TestContract is Test {
         c = new Contract();
     }
 
-    function testBar() public {
-        assertEq(uint256(1), uint256(1), "ok");
+    function testF() public {
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                E.selector,
+                1337,
+                bytes("This is an error message!")
+            )
+        );
+        c.f();
     }
 
-    function testFoo(uint256 x) public {
-        vm.assume(x < type(uint128).max);
-        assertEq(x + x, x * 2);
+    function testFAssembly() public {
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                E.selector,
+                1337,
+                bytes("This is an error message!")
+            )
+        );
+        c.fAssembly();
     }
 }
